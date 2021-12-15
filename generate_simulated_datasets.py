@@ -52,7 +52,7 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
             tmp.to_csv(ref_id + "_" + primer_amplicon.split(".")[0] + ".bed", index = None, sep = "\t")
         except:
             print("\n***ERROR****\nProblems reading in_silico_pcr.pl results - make sure it is installed")
-            exit()
+            sys.exit(1)
     ### Generate amplicon fasta file from bed file
     bed_info = {}
     for ref_id, proportion in ref_ids.items():
@@ -67,6 +67,7 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
     
     ### Write out a single file of amplicons adjusting for the proportion of each variant
     output_prefix = '_'.join('{}_{}'.format(key, value) for key, value in ref_ids.items())
+    number_amplicons = []
     with open(output_prefix + "_" + "amplicons.fasta", "w") as outfile:
         for ref_id, values in bed_info.items():
             fasta_sequences = SeqIO.parse(open(ref_id + ".fasta"),'fasta')
@@ -75,9 +76,11 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
                 if ref_id in seq.id:
                     for i in range(1, proportion):
                         for value in values:
+                                ## Get count of amplicons to scale number of reads
+                                number_amplicons.append(value)
                                 amplicon = seq.seq[int(float(value[1])-1):int((float(value[1]) + float(value[2]))-1)]
                                 outfile.write(">" + ref_id + "_" + value[0] + "\n" + str(amplicon) + "\n")
-
+    number_amplicons = len(number_amplicons)
     ### Generate amplicon files for each genome
     for ref_id, values in bed_info.items():
         fasta_sequences = SeqIO.parse(open(ref_id + ".fasta"),'fasta')
@@ -93,9 +96,10 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
     input_id = output_prefix + "_" + "amplicons.fasta"
     output_id = output_prefix + "art_out"
     try:
-        subprocess.call(["art_illumina", "-amp", "-p", "-na", "-i", input_id, "-l", "250", "-f", str(number_reads),  "-o", output_id])
+        subprocess.call(["art_illumina", "-amp", "-p", "-na", "-i", input_id, "-l", "250", "-f", str(round(int(number_reads)/int(number_amplicons))),  "-o", output_id])
     except: 
         print("\n***ERROR***\nProblems running art - make sure it is installed")
+        sys.exit(1)
     ### Generate single art files per reference genome
     for ref_id, proportion in ref_ids.items():
         input_id = ref_id + "_" + primer_amplicon.split(".")[0] + "amplicons.fasta"
