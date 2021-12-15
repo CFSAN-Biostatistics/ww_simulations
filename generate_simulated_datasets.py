@@ -93,7 +93,7 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
     input_id = output_prefix + "_" + "amplicons.fasta"
     output_id = output_prefix + "art_out"
     try:
-        subprocess.call(["art_illumina", "-amp", "-p", "-sam", "-na", "-i", input_id, "-l", "250", "-f", str(number_reads),  "-o", output_id])
+        subprocess.call(["art_illumina", "-amp", "-p", "-na", "-i", input_id, "-l", "250", "-f", str(number_reads),  "-o", output_id])
     except: 
         print("\n***ERROR***\nProblems running art - make sure it is installed")
     ### Generate single art files per reference genome
