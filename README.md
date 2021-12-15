@@ -19,3 +19,7 @@ Example: `generate_simulated_datasets.py -f relevantGISAID.fa -i test_output_rep
 # Workflow/strategy
 * `generate_simulated_datasets.py` models differences in variation composition by multiplying the number of each amplicon from each variant by the percent abundance it is in the simulated 'sample'. 
 * The total reads of is determined by the `-f` flag passed to `art` which is "the fold of read coverage to be simulated or number of reads/read pairs generated for each amplicon"
+
+
+# License
+See the LICENSE.txt file included in the SNP Pipeline distribution.
