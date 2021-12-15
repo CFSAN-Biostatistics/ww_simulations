@@ -100,7 +100,7 @@ def get_results(in_file, primer_amplicon, id_file, number_reads):
     for ref_id, proportion in ref_ids.items():
         input_id = ref_id + "_" + primer_amplicon.split(".")[0] + "amplicons.fasta"
         output_id = ref_id + "_" + primer_amplicon.split(".")[0] + "art_out"
-        subprocess.call(["art_illumina", "-amp", "-p", "-sam", "-na", "-i", input_id, "-l", "250", "-f", "1",  "-o", output_id])
+        subprocess.call(["art_illumina", "-amp", "-p", "-na", "-i", input_id, "-l", "250", "-f", "1",  "-o", output_id])
 
 def parse_arguments(system_args):
     """
