@@ -16,7 +16,7 @@ Example: `generate_replicates.py -i epi_isls.txt -n 2 -o test_output`
 
 * `generate_simulated_datasets.py` takes the ouput of `generate_replicates.py` and a number of other files/arguments and generates simulated data reflecting the composition of the variants
  
-Example: `generate_simulated_datasets.py -f relevantGISAID.fa -i test_output_replicate_1.tsv -p neb_vss1a_primer.tsv -n 10`
+Example: ```generate_simulated_datasets.py -f relevantGISAID.fa -i test_output_replicate_1.tsv -p neb_vss1a_primer.tsv -n 10```
 
 # Workflow/strategy
 * `generate_simulated_datasets.py` models differences in variation composition by multiplying the number of each amplicon from each variant by the percent abundance it is in the simulated 'sample'. 
