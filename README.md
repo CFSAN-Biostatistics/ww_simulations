@@ -2,7 +2,7 @@
 
 A series of scripts to generate simulated datasets of different variant composition for SC2 wastewater surveillance efforts.
 
-This is in active development and not ready for primetime yet.
+This is in active development and not ready for primetime yet...hopefully soon.
 
 # Dependencies
 * python (3.8.1)
