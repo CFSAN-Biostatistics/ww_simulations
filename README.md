@@ -19,3 +19,4 @@ Example: `generate_simulated_datasets.py -f five_sequences.fasta -i test_output_
 # Workflow/strategy
 * `generate_simulated_datasets.py` models differences in variation composition by multiplying the number of each amplicon from each variant by the percent abundance it is in the simulated 'sample'. 
 * The total reads of is determined by the `-f` flag passed to `art` which is "the fold of read coverage to be simulated or number of reads/read pairs generated for each amplicon"
+
