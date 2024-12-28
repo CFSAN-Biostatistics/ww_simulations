@@ -7,7 +7,6 @@ Created on Feb. 4 2022
 @author: James.Pettengill
 """
 
-import os
 import sys
 
 # print(sys.argv[0])
@@ -27,5 +26,24 @@ var_5 = infile.split("_")[8]
 prop_5 = infile.split("_")[9].replace("art", "")
 
 with open(infile.replace("art_out1.fq", "composition_info.tsv"), "w") as outfile:
-    outfile.write(var_1 + "\t" + prop_1 + "\n" + var_2 + "\t" + prop_2 + "\n" + var_3 + "\t" + prop_3 + "\n" + var_4 + "\t" + prop_4 + "\n" + var_5 + "\t" + prop_5 )
-
+    outfile.write(
+        var_1
+        + "\t"
+        + prop_1
+        + "\n"
+        + var_2
+        + "\t"
+        + prop_2
+        + "\n"
+        + var_3
+        + "\t"
+        + prop_3
+        + "\n"
+        + var_4
+        + "\t"
+        + prop_4
+        + "\n"
+        + var_5
+        + "\t"
+        + prop_5
+    )
