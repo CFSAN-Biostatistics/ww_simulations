@@ -9,6 +9,7 @@ import random
 import argparse
 import sys
 
+
 def generate_replicates(in_file, num_reps, out_file):
     variants = []
     with open(in_file, "r") as infile:
@@ -28,13 +29,14 @@ def generate_replicates(in_file, num_reps, out_file):
         remainder = 100 - sum(samples)
         list_index = random.randint(0, max_variants - 1)
         res[i][list_index][1] = res[i][list_index][1] + remainder
-    
+
     for key, value in res.items():
-       with open(out_file + "_replicate_" + str(key) + ".tsv", "w") as output_file:
-           # output_file.write("Variant\tProportion\n")
-           for val in value:
+        with open(out_file + "_replicate_" + str(key) + ".tsv", "w") as output_file:
+            # output_file.write("Variant\tProportion\n")
+            for val in value:
                 output_file.write(str(val[0]) + "\t" + str(val[1]) + "\n")
-    
+
+
 def parse_arguments(system_args):
     """
     Parse command line arguments
@@ -45,15 +47,40 @@ def parse_arguments(system_args):
     Example usage:
     generate_replicates.py -i epi_isls.txt -n 10 -o replicates_5_variants_10_reps.tsv """
 
+    parser = argparse.ArgumentParser(
+        description=usage, formatter_class=argparse.RawTextHelpFormatter
+    )
 
-    parser = argparse.ArgumentParser(description= usage, formatter_class=argparse.RawTextHelpFormatter)
-
-    parser.add_argument("-i", "--in-file", metavar="INT", dest="in_file", default=None, required = True, help="File with new line delimited list of epi isl ids.")
-    parser.add_argument("-n", "--num-reps", metavar="INT", dest="num_reps", default=None, required = True, help="Number of replicates to generate.")
-    parser.add_argument("-o", "--out-file", metavar="STR", dest="out_file", default=None,  help="Prefix for output file - replicate number will be appended.")
+    parser.add_argument(
+        "-i",
+        "--in-file",
+        metavar="INT",
+        dest="in_file",
+        default=None,
+        required=True,
+        help="File with new line delimited list of epi isl ids.",
+    )
+    parser.add_argument(
+        "-n",
+        "--num-reps",
+        metavar="INT",
+        dest="num_reps",
+        default=None,
+        required=True,
+        help="Number of replicates to generate.",
+    )
+    parser.add_argument(
+        "-o",
+        "--out-file",
+        metavar="STR",
+        dest="out_file",
+        default=None,
+        help="Prefix for output file - replicate number will be appended.",
+    )
 
     args = parser.parse_args(system_args)
     return args
+
 
 def main(args):
     """
@@ -66,8 +93,7 @@ def main(args):
 
     generate_replicates(in_file, num_reps, out_file)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     args = parse_arguments(sys.argv[1:])
     main(args)
-
-    
